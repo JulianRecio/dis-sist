@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Chessboard{
+    - positions: Position[]
+}
+
+class Piece{
+    - type:
+    - color:
+    - origin: Position
+    - movements: movements[]
+}
+
+class RuleSet{}
+
+class Game{}
+
+@enduml
