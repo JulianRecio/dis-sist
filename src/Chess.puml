@@ -1,19 +1,94 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-class Chessboard{
+interface Board{
     - positions: Position[]
+
 }
 
-class Piece{
-    - type:
-    - color:
-    - origin: Position
-    - movements: movements[]
+class Position{
+    - verticalPosition: String
+    - horizontalPosition: Integer
+    - piece: Piece
+
 }
 
-class RuleSet{}
+Piece --> Color
+interface Piece{
+    - color: Color
+    - movementValidation: MovementValidation
+}
 
-class Game{}
+enum Color{
+    - White
+    - Black
+}
 
+class Game{
+    - board: Board
+    - victoryValidation: VictoryValidation
+    - checkValidation: CheckValidation
+    - surrenderValidation: SurrenderValidation
+    - player1Pieces: Piece[]
+    - player2Pieces: Piece[]
+    - rules: RuleSet
+    - turn: boolean
+    + movePiece(piece: Piece, board: Board)
+
+}
+
+interface victoryValidation{}
+
+interface checkValidation{}
+
+interface surrenderValidation{}
+
+interface movementValidation{}
+
+Pawn ..|> Piece
+class Pawn{
+    - color: Color
+    - movementValidation: MovementValidation
+}
+
+Knight ..|> Piece
+class Knight{
+    - color: Color
+    - movementValidation: MovementValidation
+}
+
+Bishop ..|> Piece
+class Bishop{
+    - color: Color
+    - movementValidation: MovementValidation
+}
+
+Rook ..|> Piece
+class Rook{
+    - color: Color
+    - movementValidation: MovementValidation
+}
+
+Queen ..|> Piece
+class Queen{
+    - color: Color
+    - movementValidation: MovementValidation
+}
+
+King ..|> Piece
+class King{
+    - color: Color
+    - movementValidation: MovementValidation
+}
+
+
+
+/'
+    --|> herencia
+    *-- composición
+    o-- agregación
+    --> asosiación
+    ..> dependencia
+    <|.. realización/implementación
+'/
 @enduml
